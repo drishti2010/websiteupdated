@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
+  ::selection { background: #b3d4ff; }
+  .serif { font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.035em; }
+  @keyframes blobA { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(28px,-34px) scale(1.08); } }
+  @keyframes blobB { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-32px,26px) scale(1.06); } }
+  @keyframes pageEnter { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes pageExit { from { opacity: 1; } to { opacity: 0; } }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Playfair+Display:ital,wght@1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
+</helmet>
+
+<div style="--accent: {{ accent }}; --radius: {{ radius }}; position:relative; z-index:0; background:#ffffff; color:#1d1d1f; min-height:100vh; display:flex; flex-direction:column; overflow-x:hidden;" data-root="">
+
+  <div aria-hidden="true" style="position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden;">
+    <div style="position:absolute; top:-8%; left:-8%; width:46vw; max-width:560px; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle at 30% 30%, rgba(0,102,204,0.16), rgba(0,102,204,0) 70%); filter:blur(8px); animation:blobA 16s ease-in-out infinite;"></div>
+    <div style="position:absolute; bottom:-10%; right:-8%; width:42vw; max-width:520px; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle at 60% 40%, rgba(0,102,204,0.12), rgba(0,102,204,0) 70%); filter:blur(8px); animation:blobB 19s ease-in-out infinite;"></div>
+  </div>
+
+
+  <div data-progress="" style="position:fixed; top:0; left:0; height:3px; width:0%; background:var(--accent,#0066cc); z-index:2000; transition:width .08s linear;"></div>
+
+  <header style="position:fixed; top:0; left:0; right:0; height:48px; z-index:1000; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.72); backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid rgba(0,0,0,0.06);">
+    <nav style="width:100%; max-width:1280px; padding:0 22px; display:flex; align-items:center; justify-content:space-between;">
+      <a href="index.dc.html" class="serif" style="font-size:23px; letter-spacing:0; color:#1d1d1f;">Drishti Arora</a>
+      <div style="display:flex; gap:26px; font-size:13px; color:#1d1d1f;">
+        <a href="about.dc.html" style="opacity:.8;">About</a>
+        <a href="work.dc.html" style="opacity:.8;">Work</a>
+        <a href="writing.dc.html" style="opacity:.8;">Writing</a>
+        <a href="contact.dc.html" style="color:var(--accent,#0066cc); font-weight:500;">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section data-screen-label="Contact hero" style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:150px 22px 60px;">
+    <div style="max-width:1280px; margin:0 auto; width:100%;">
+      <p contenteditable="true" style="margin:0 0 18px; font-size:15px; font-weight:600; letter-spacing:.02em; color:var(--accent,#0066cc);">Contact</p>
+      <h1 contenteditable="true" class="serif" style="margin:0 0 18px; font-size:clamp(56px,12vw,150px); letter-spacing:-0.01em; line-height:0.88;">Say <span style="font-family:'Playfair Display',Georgia,serif; font-style:italic; font-weight:600; color:#003d99;">hello</span><span style="color:#003d99;">...</span></h1>
+      <p contenteditable="true" style="margin:0 0 56px; max-width:560px; font-size:clamp(19px,2.8vw,26px); line-height:1.45; color:#6e6e73;">Whether it's a project, a question, or just to chat — my inbox is open.</p>
+
+      <div style="border-top:1px solid #2a2a2c;">
+        <a href="mailto:itsdrishti2010@gmail.com" style="display:flex; align-items:center; justify-content:space-between; gap:20px; padding:26px 0; border-bottom:1px solid #2a2a2c;">
+          <span contenteditable="true" style="font-size:clamp(24px,3.6vw,38px); font-weight:600; letter-spacing:-0.025em;">Email</span>
+          <span contenteditable="true" style="font-size:16px; color:#86868b;">itsdrishti2010@gmail.com&nbsp;↗</span>
+        </a>
+        <a href="https://www.linkedin.com/in/arora-drishti/" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:space-between; gap:20px; padding:26px 0; border-bottom:1px solid #2a2a2c;">
+          <span contenteditable="true" style="font-size:clamp(24px,3.6vw,38px); font-weight:600; letter-spacing:-0.025em;">LinkedIn</span>
+          <span contenteditable="true" style="font-size:16px; color:#86868b;">@itsdrishti&nbsp;↗</span>
+        </a>
+        <a href="https://www.youtube.com/@itsdrishtiarora" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:space-between; gap:20px; padding:26px 0; border-bottom:1px solid #2a2a2c;">
+          <span contenteditable="true" style="font-size:clamp(24px,3.6vw,38px); font-weight:600; letter-spacing:-0.025em;">YouTube</span>
+          <span contenteditable="true" style="font-size:16px; color:#86868b;">@itsdrishti.channel ↗</span>
+        </a>
+        <a href="https://substack.com/@itsdrishti" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:space-between; gap:20px; padding:26px 0; border-bottom:1px solid #2a2a2c;">
+          <span contenteditable="true" style="font-size:clamp(24px,3.6vw,38px); font-weight:600; letter-spacing:-0.025em;">Substack</span>
+          <span contenteditable="true" style="font-size:16px; color:#86868b;">itsdrishti.substack.com</span>
+        </a>
+        <a href="https://medium.com/@itsdrishti" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:space-between; gap:20px; padding:26px 0; border-bottom:1px solid #2a2a2c;">
+          <span contenteditable="true" style="font-size:clamp(24px,3.6vw,38px); font-weight:600; letter-spacing:-0.025em;">Medium</span>
+          <span contenteditable="true" style="font-size:16px; color:#86868b;">@itsdrishti&nbsp;↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:#f5f5f7; color:#86868b; padding:34px 22px; font-size:12px;">
+    <div style="max-width:1280px; margin:0 auto; display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; align-items:center;">
+      <span>© 2026 Drishti Arora. All rights reserved.</span>
+      <div style="display:flex; gap:20px;">
+        <a href="index.dc.html" style="color:#6e6e73;">Home</a>
+        <a href="work.dc.html" style="color:#6e6e73;">Work</a>
+        <a href="about.dc.html" style="color:#6e6e73;">About</a>
+        <a href="writing.dc.html" style="color:#6e6e73;">Writing</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#0066cc&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;reduceMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;cornerStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Rounded&quot;,&quot;Sharp&quot;],&quot;default&quot;:&quot;Rounded&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accentColor || '#0066cc';
+    const radius = (this.props.cornerStyle === 'Sharp') ? '0px' : '18px';
+    return { accent, radius };
+  }
+  componentDidMount() { this._setupPageTransitions(); this._setupReveals(); this._setupScroll(); }
+  
+  _setupPageTransitions() {
+    const root = document.querySelector('[data-root]');
+    if (root) {
+      root.style.animation = 'pageEnter 0.06s ease-out';
+    }
+    
+    // Intercept link clicks to fade out before navigating
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href]');
+      if (!link) return;
+      
+      const href = link.getAttribute('href');
+      // Only fade for same-domain navigation
+      if (href && (href.startsWith('/') || href.includes('.dc.html') || href.includes('.html'))) {
+        e.preventDefault();
+        if (root) {
+          root.style.animation = 'pageExit 0.04s ease-in forwards';
+        }
+        setTimeout(() => {
+          window.location.href = href;
+        }, 40);
+      }
+    });
+  }
+  componentDidUpdate() { this._setupReveals(); }
+  _setupReveals() {
+    if (this._io) { this._io.disconnect(); this._io = null; }
+    const els = Array.from(document.querySelectorAll('[data-reveal]'));
+    if (!els.length) return;
+    if (this.props.reduceMotion) {
+      els.forEach(e => { e.style.opacity = '1'; e.style.transform = 'none'; e.style.filter = 'none'; e.style.transition = 'none'; });
+      return;
+    }
+    const ease = 'opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1), filter 1s cubic-bezier(.16,1,.3,1)';
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          const el = en.target;
+          const d = parseInt(el.getAttribute('data-delay') || '0', 10);
+          el.style.transitionDelay = d + 'ms';
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+          el.style.filter = 'none';
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+    this._io = io;
+    els.forEach(e => {
+      const r = e.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.95) { e.style.opacity = '1'; e.style.transform = 'none'; e.style.filter = 'none'; return; }
+      e.style.opacity = '0';
+      e.style.transform = 'translateY(36px) scale(0.97)';
+      e.style.filter = 'blur(10px)';
+      e.style.transition = ease;
+      io.observe(e);
+    });
+  }
+  _setupScroll() {
+    const bar = document.querySelector('[data-progress]');
+    if (!bar) return;
+    let ticking = false;
+    const update = () => { ticking = false; const st = window.scrollY || document.documentElement.scrollTop; const max = (document.documentElement.scrollHeight - window.innerHeight) || 1; bar.style.width = Math.min(100, (st / max) * 100) + '%'; };
+    this._onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    update();
+  }
+  componentWillUnmount() { if (this._io) this._io.disconnect(); if (this._onScroll) window.removeEventListener('scroll', this._onScroll); }
+}
+</script>
+</body>
+</html>

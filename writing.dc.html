@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
+  ::selection { background: #b3d4ff; }
+  .serif { font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.035em; }
+  @keyframes blobA { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(28px,-34px) scale(1.08); } }
+  @keyframes blobB { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-32px,26px) scale(1.06); } }
+  @keyframes pageEnter { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes pageExit { from { opacity: 1; } to { opacity: 0; } }
+  @keyframes ov-fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes ov-zoom { from { opacity: 0; transform: translateY(24px) scale(0.92); } to { opacity: 1; transform: none; } }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+</helmet>
+
+<div style="--accent: {{ accent }}; --radius: {{ radius }}; position:relative; z-index:0; background:#ffffff; color:#1d1d1f; overflow-x:hidden;" data-root="">
+
+  <div aria-hidden="true" style="position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden;">
+    <div style="position:absolute; top:-8%; left:-8%; width:46vw; max-width:560px; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle at 30% 30%, rgba(0,102,204,0.16), rgba(0,102,204,0) 70%); filter:blur(8px); animation:blobA 16s ease-in-out infinite;"></div>
+    <div style="position:absolute; bottom:-10%; right:-8%; width:42vw; max-width:520px; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle at 60% 40%, rgba(0,102,204,0.12), rgba(0,102,204,0) 70%); filter:blur(8px); animation:blobB 19s ease-in-out infinite;"></div>
+  </div>
+
+
+  <div data-blur-wrap="" style="filter:{{ pageBlur }}; transition:filter .5s cubic-bezier(.16,1,.3,1);">
+
+  <div data-progress="" style="position:fixed; top:0; left:0; height:3px; width:0%; background:var(--accent,#0066cc); z-index:2000; transition:width .08s linear;"></div>
+
+  <header style="position:fixed; top:0; left:0; right:0; height:48px; z-index:1000; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.72); backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid rgba(0,0,0,0.06);">
+    <nav style="width:100%; max-width:1280px; padding:0 22px; display:flex; align-items:center; justify-content:space-between;">
+      <a href="index.dc.html" class="serif" style="font-size:23px; letter-spacing:0;">Drishti Arora</a>
+      <div style="display:flex; gap:26px; font-size:13px;">
+        <a href="about.dc.html" style="opacity:.85;">About</a>
+        <a href="work.dc.html" style="opacity:.85;">Work</a>
+        <a href="writing.dc.html" style="color:var(--accent,#0066cc); font-weight:500;">Writing</a>
+        <a href="contact.dc.html" style="opacity:.85;">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HEADER -->
+  <section data-screen-label="Writing header" style="padding:150px clamp(22px,6vw,80px) 28px;">
+    <div style="max-width:1040px; margin:0 auto;">
+      <p style="margin:0 0 14px; font-size:15px; font-weight:600; letter-spacing:.02em; color:var(--accent,#0066cc);">Writing</p>
+      <h1 class="serif" style="margin:0; font-size:clamp(54px,11vw,124px); letter-spacing:-0.01em; line-height:0.9;">Notes &amp; <span style="font-style:italic;">ideas</span>.</h1>
+      <p style="margin:24px 0 0; font-size:clamp(19px,2.6vw,24px); line-height:1.45; color:#6e6e73;">Deep dives and publications! Tap a project to read everything.</p>
+    </div>
+  </section>
+
+  <!-- POSTS -->
+  <section data-screen-label="Posts" style="padding:8px clamp(22px,6vw,80px) 110px;">
+    <div style="max-width:1040px; margin:0 auto; display:flex; flex-direction:column; gap:22px;">
+      <div data-reveal="" onClick="{{ openPrevera }}" role="button" tabindex="0" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:24px; padding:42px clamp(26px,4vw,46px); background:#f5f5f7; border-radius:var(--radius,18px); transition:transform .5s cubic-bezier(.16,1,.3,1), box-shadow .5s ease, background .4s ease;" style-hover="transform:translateY(-6px); background:#eef0f3; box-shadow:0 24px 56px -24px rgba(0,0,0,0.38);">
+        <div>
+          <p style="margin:0 0 10px; font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--accent,#0066cc);">Digital Twin</p>
+          <h2 class="serif" style="margin:0 0 12px; font-size:clamp(38px,6.5vw,68px); letter-spacing:0; line-height:0.9;">Prevera</h2>
+          <p style="margin:0; max-width:580px; font-size:18px; line-height:1.5; color:#6e6e73;">An AI-powered digital twin for personalized, predictive medicine — everything I've written while building it.</p>
+          <span style="display:inline-block; margin-top:18px; font-size:15px; font-weight:500; color:#1d1d1f;">Publications →</span>
+        </div>
+        <div aria-hidden="true" style="flex:none; width:58px; height:58px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:#fff; color:var(--accent,#0066cc); font-size:23px;">↗</div>
+      </div>
+
+      <div data-reveal="" data-delay="70" onClick="{{ openSpotlight }}" role="button" tabindex="0" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:24px; padding:42px clamp(26px,4vw,46px); background:#f5f5f7; border-radius:var(--radius,18px); transition:transform .5s cubic-bezier(.16,1,.3,1), box-shadow .5s ease, background .4s ease;" style-hover="transform:translateY(-6px); background:#eef0f3; box-shadow:0 24px 56px -24px rgba(0,0,0,0.38);">
+        <div>
+          <p style="margin:0 0 10px; font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--accent,#0066cc);">Series</p>
+          <h2 class="serif" style="margin:0 0 12px; font-size:clamp(38px,6.5vw,68px); letter-spacing:0; line-height:0.9;">Weekly Spotlight&nbsp;✨&nbsp;<span style="font-size: 32px; background-color: rgb(255, 255, 255);"></span></h2>
+          <p style="margin:0; max-width:580px; font-size:18px; line-height:1.5; color:#6e6e73;">Highlighting Those Who Dare to Dream!</p>
+          <span style="display:inline-block; margin-top:18px; font-size:15px; font-weight:500; color:#1d1d1f;">Full Weekly Series →</span>
+        </div>
+        <div aria-hidden="true" style="flex:none; width:58px; height:58px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:#fff; color:var(--accent,#0066cc); font-size:23px;">↗</div>
+      </div>
+
+      <div data-reveal="" data-delay="140" onClick="{{ openDrishtea }}" role="button" tabindex="0" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:24px; padding:42px clamp(26px,4vw,46px); background:#f5f5f7; border-radius:var(--radius,18px); transition:transform .5s cubic-bezier(.16,1,.3,1), box-shadow .5s ease, background .4s ease;" style-hover="transform:translateY(-6px); background:#eef0f3; box-shadow:0 24px 56px -24px rgba(0,0,0,0.38);">
+        <div>
+          <p style="margin:0 0 10px; font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--accent,#0066cc);">Newsletter</p>
+          <h2 class="serif" style="margin:0 0 12px; font-size:clamp(38px,6.5vw,68px); letter-spacing:0; line-height:0.9;">A Cup of Drishtea&nbsp;☕️</h2>
+          <p style="margin:0; max-width:580px; font-size:18px; line-height:1.5; color:#6e6e73;">A monthly reflection — documenting my journey one step at a time!</p>
+          <span style="display:inline-block; margin-top:18px; font-size:15px; font-weight:500; color:#1d1d1f;">Monthly Newsletters →</span>
+        </div>
+        <div aria-hidden="true" style="flex:none; width:58px; height:58px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:#fff; color:var(--accent,#0066cc); font-size:23px;">↗</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBSCRIBE -->
+  <section data-screen-label="Subscribe" style="background:#f5f5f7; padding:100px 22px;">
+    <div style="max-width:560px; margin:0 auto; text-align:center;">
+      <h2 data-reveal="" class="serif" style="margin:0 0 14px; font-size:clamp(36px,5.6vw,58px); letter-spacing:0; line-height:0.95;">Subscribe.</h2>
+      <p data-reveal="" data-delay="60" style="margin:0 0 30px; font-size:19px; line-height:1.5; color:#6e6e73;">New posts, straight to your inbox. No spam — just ideas.</p>
+      <div data-reveal="" data-delay="120" style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <a href="https://substack.com/@itsdrishti" target="_blank" rel="noopener noreferrer" style="background:var(--accent,#0066cc); color:#fff; font-size:16px; font-weight:500; padding:13px 26px; border-radius:980px;">Read on Substack</a>
+        <a href="https://medium.com/@itsdrishti" target="_blank" rel="noopener noreferrer" style="background:var(--accent,#0066cc); color:#fff; font-size:16px; font-weight:500; padding:13px 26px; border-radius:980px;">Follow on Medium</a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:#f5f5f7; color:#86868b; padding:34px 22px; font-size:12px; border-top:1px solid #e3e3e8;">
+    <div style="max-width:1280px; margin:0 auto; display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; align-items:center;">
+      <span>© 2026 Drishti Arora. All rights reserved.</span>
+      <div style="display:flex; gap:20px;">
+        <a href="index.dc.html" style="color:#86868b;">Home</a>
+        <a href="work.dc.html" style="color:#86868b;">Work</a>
+        <a href="about.dc.html" style="color:#86868b;">About</a>
+        <a href="contact.dc.html" style="color:#86868b;">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  </div><!-- /blur-wrap -->
+
+  <sc-if value="{{ showPrevera }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeModal }}" style="position:fixed; inset:0; z-index:3000; display:flex; align-items:flex-start; justify-content:center; padding:clamp(40px,8vh,96px) 20px 50px; background:rgba(18,18,20,0.34); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px); animation:ov-fade .4s ease;">
+      <div onClick="{{ stop }}" style="position:relative; width:100%; max-width:880px; max-height:84vh; display:flex; flex-direction:column; background:#fff; border-radius:26px; box-shadow:0 40px 100px -24px rgba(0,0,0,0.5); overflow:hidden; animation:ov-zoom .5s cubic-bezier(.16,1,.3,1);">
+        <div style="position:sticky; top:0; z-index:2; display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:30px clamp(24px,4vw,38px) 22px; background:linear-gradient(#fff 72%, rgba(255,255,255,0));">
+          <div>
+            <p contenteditable="true" style="margin:0 0 8px; font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--accent,#0066cc);">Digital Twin</p>
+            <h2 contenteditable="true" class="serif" style="margin:0; font-size:clamp(34px,5vw,54px); letter-spacing:0; line-height:0.92;">Prevera</h2>
+          </div>
+          <button onClick="{{ closeModal }}" aria-label="Close" style="flex:none; width:42px; height:42px; border:none; border-radius:50%; background:#f0f0f3; color:#1d1d1f; font-size:21px; line-height:1; cursor:pointer; transition:background .2s ease;" style-hover="background:#e3e3e8;">×</button>
+        </div>
+        <div style="overflow-y:auto; padding:4px clamp(24px,4vw,38px) 40px;">
+          <div style="padding:28px 0; border-top:1px solid #e3e3e8;">
+            <span style="font-size:14px; color:#86868b;">Nov 5, 2025 · 12 min read</span>
+            <h3 class="serif" style="margin:8px 0 8px; font-size:clamp(23px,3vw,32px); letter-spacing:0; line-height:1.05;">AI-Driven Digital Twins: The Revolution of Personalized Medicine</h3>
+            <p style="margin:0; font-size:17px; line-height:1.55; color:#6e6e73;">Current medicine focuses on treatments after illness, but what if we could predict, prevent and personalize healthcare before problems arise?</p>
+            <a href="https://medium.com/@itsdrishti/ai-driven-digital-twins-the-revolution-of-personalized-medicine-0ca5b1e45f69" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:12px; font-size:15px; font-weight:500; color:var(--accent,#0066cc);">Read&nbsp;›</a>
+          </div>
+          <div style="padding:28px 0; border-top:1px solid #e3e3e8;">
+            <span style="font-size:14px; color:#86868b;">Nov 16, 2025 · 8 min read</span>
+            <h3 class="serif" style="margin:8px 0 8px; font-size:clamp(23px,3vw,32px); letter-spacing:0; line-height:1.05;">A Future Version of You!</h3>
+            <p style="margin:0; font-size:17px; line-height:1.55; color:#6e6e73;">Imagine walking into a hospital and, before a doctor prescribes anything, they could test every medication on a virtual version of you.</p>
+            <a href="https://medium.com/@itsdrishti/a-future-version-of-you-b90c1dd3af84" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:12px; font-size:15px; font-weight:500; color:var(--accent,#0066cc);">Read&nbsp;›</a>
+          </div>
+          <div style="padding:28px 0; border-top:1px solid #e3e3e8;">
+            <span style="font-size:14px; color:#86868b;">Jan 7, 2026 · 6 min read</span>
+            <h3 class="serif" style="margin:8px 0 8px; font-size:clamp(23px,3vw,32px); letter-spacing:0; line-height:1.05;">The Health App That Lets You See The Future</h3>
+            <p style="margin:0; font-size:17px; line-height:1.55; color:#6e6e73;">I built my own Digital Twin Model!!</p>
+            <a href="https://medium.com/@itsdrishti/the-health-app-that-lets-you-see-the-future-e0c2dfa0d977" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:12px; font-size:15px; font-weight:500; color:var(--accent,#0066cc);">Read&nbsp;›</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showSpotlight }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeModal }}" style="position:fixed; inset:0; z-index:3000; display:flex; align-items:flex-start; justify-content:center; padding:clamp(40px,8vh,96px) 20px 50px; background:rgba(18,18,20,0.34); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px); animation:ov-fade .4s ease;">
+      <div onClick="{{ stop }}" style="position:relative; width:100%; max-width:880px; max-height:84vh; display:flex; flex-direction:column; background:#fff; border-radius:26px; box-shadow:0 40px 100px -24px rgba(0,0,0,0.5); overflow:hidden; animation:ov-zoom .5s cubic-bezier(.16,1,.3,1);">
+        <div style="position:sticky; top:0; z-index:2; display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:30px clamp(24px,4vw,38px) 22px; background:linear-gradient(#fff 72%, rgba(255,255,255,0));">
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <p contenteditable="true" style="margin:0; font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--accent,#0066cc);">Series</p>
+            <h2 contenteditable="true" class="serif" style="margin:0; font-size:clamp(34px,5vw,54px); letter-spacing:0; line-height:0.92;">Weekly Spotlight✨</h2>
+            <a href="#" style="font-size: 13px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--accent,#0066cc); text-decoration-line: underline">Check out the full series here →</a>
+          </div>
+          <button onClick="{{ closeModal }}" aria-label="Close" style="flex:none; width:42px; height:42px; border:none; border-radius:50%; background:#f0f0f3; color:#1d1d1f; font-size:21px; line-height:1; cursor:pointer; transition:background .2s ease;" style-hover="background:#e3e3e8;">×</button>
+        </div>
+        <div style="overflow-y:auto; padding:4px clamp(24px,4vw,38px) 40px;">
+          <div style="padding:28px 0; border-top:1px solid #e3e3e8;">
+            <span style="font-size:14px; color:#86868b;">Issue 01</span>
+            <h3 class="serif" style="margin:8px 0 8px; font-size:clamp(23px,3vw,32px); letter-spacing:0; line-height:1.05;">Naval Ravikant<span style="font-size: clamp(23px, 3vw, 32px); letter-spacing: 0px;">✨</span></h3>
+            <p style="margin:0; font-size:17px; line-height:1.55; color:#6e6e73;"></p><div style="font-size: 17px; color: #6E6E73; line-height: 1.55">Naval Ravikant, a thinker and entrepreneur whose ideas on wealth, happiness, and leverage have influenced millions around the world.</div><p></p>
+            <a href="https://substack.com/home/post/p-195450023" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:12px; font-size:15px; font-weight:500; color:var(--accent,#0066cc);">Read&nbsp;›</a>
+          </div>
+          <div style="padding:28px 0; border-top:1px solid #e3e3e8;">
+            <span style="font-size:14px; color:#86868b;">Issue 02</span>
+            <h3 class="serif" style="margin:8px 0 8px; font-size:clamp(23px,3vw,32px); letter-spacing:0; line-height:1.05;">Melanie Perkins<span style="font-size: clamp(23px, 3vw, 32px); letter-spacing: 0px;">✨</span></h3>
+            <p style="margin:0; font-size:17px; line-height:1.55; color:#6e6e73;">Melanie Perkins, the entrepreneur behind Canva, one of the most widely used design platforms in the world.</p>
+            <a href="https://substack.com/@itsdrishti/note/p-183615896" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:12px; font-size:15px; font-weight:500; color:var(--accent,#0066cc);">Read&nbsp;›</a>
+          </div>
+          <div style="padding:28px 0; border-top:1px solid #e3e3e8;">
+            <span style="font-size:14px; color:#86868b;">Issue 03</span>
+            <h3 class="serif" style="margin:8px 0 8px; font-size:clamp(23px,3vw,32px); letter-spacing:0; line-height:1.05;">Sam Altman<span style="font-size: clamp(23px, 3vw, 32px); letter-spacing: 0px;">✨</span></h3>
+            <p style="margin:0; font-size:17px; line-height:1.55; color:#6e6e73;">Sam Altman is an entrepreneur, investor, and CEO of OpenAI, the organization behind cutting-edge AI technologies.</p>
+            <a href="https://substack.com/home/post/p-200323964" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:12px; font-size:15px; font-weight:500; color:var(--accent,#0066cc);">Read&nbsp;›</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showDrishtea }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeModal }}" style="position:fixed; inset:0; z-index:3000; display:flex; align-items:flex-start; justify-content:center; padding:clamp(40px,8vh,96px) 20px 50px; background:rgba(18,18,20,0.34); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px); animation:ov-fade .4s ease;">
+      <div onClick="{{ stop }}" style="position:relative; width:100%; max-width:880px; max-height:84vh; display:flex; flex-direction:column; background:#fff; border-radius:26px; box-shadow:0 40px 100px -24px rgba(0,0,0,0.5); overflow:hidden; animation:ov-zoom .5s cubic-bezier(.16,1,.3,1);">
+        <div style="position:sticky; top:0; z-index:2; display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:30px clamp(24px,4vw,38px) 22px; background:linear-gradient(#fff 72%, rgba(255,255,255,0));">
+          <div>
+            <p contenteditable="true" style="margin:0 0 8px; font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--accent,#0066cc);">Newsletter</p>
+            <h2 contenteditable="true" class="serif" style="margin:0; font-size:clamp(34px,5vw,54px); letter-spacing:0; line-height:0.92;">A Cup of Drishtea ☕️</h2>
+            <a href="#" style="display:inline-block; margin-top:10px; font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; text-decoration-line:underline; color:var(--accent,#0066cc);">Check out the full series here →</a>
+          </div>
+          <button onClick="{{ closeModal }}" aria-label="Close" style="flex:none; width:42px; height:42px; border:none; border-radius:50%; background:#f0f0f3; color:#1d1d1f; font-size:21px; line-height:1; cursor:pointer; transition:background .2s ease;" style-hover="background:#e3e3e8;">×</button>
+        </div>
+        <div style="overflow-y:auto; padding:4px clamp(24px,4vw,38px) 40px;">
+          <div style="padding:28px 0; border-top:1px solid #e3e3e8;">
+            <span style="font-size:14px; color:#86868b;">Latest!</span>
+            <h3 class="serif" style="margin:8px 0 8px; font-size:clamp(23px,3vw,32px); letter-spacing:0; line-height:1.05;">May '26 Edition! 🩷</h3>
+            <p style="margin: 0; font-size: 17px; line-height: 1.55; color: #6e6e73; font-style: normal">“How lucky I am to have something that makes saying goodbye so hard.”</p>
+            <a href="https://substack.com/home/post/p-200323964" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:12px; font-size:15px; font-weight:500; color:var(--accent,#0066cc);">Read&nbsp;›</a>
+          </div>
+          <div style="padding:28px 0; border-top:1px solid #e3e3e8;">
+            <span style="font-size:14px; color:#86868b;">Letter</span>
+            <h3 class="serif" style="margin:8px 0 8px; font-size:clamp(23px,3vw,32px); letter-spacing:0; line-height:1.05;">April '26 Edition! 🚀</h3>
+            <p style="margin:0; font-size:17px; line-height:1.55; color:#6e6e73;">“The future belongs to those who believe in the beauty of their dreams.”</p>
+            <a href="https://substack.com/home/post/p-195451801" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:12px; font-size:15px; font-weight:500; color:var(--accent,#0066cc);">Read&nbsp;›</a>
+          </div>
+          <div style="padding:28px 0; border-top:1px solid #e3e3e8;">
+            <span style="font-size:14px; color:#86868b;">Letter</span>
+            <h3 class="serif" style="margin:8px 0 8px; font-size:clamp(23px,3vw,32px); letter-spacing:0; line-height:1.05;">March '26 Edition! 💡</h3>
+            <p style="margin:0; font-size:17px; line-height:1.55; color:#6e6e73;">“Play a game so big that people don’t even understand your moves—yet.”</p>
+            <a href="https://substack.com/home/post/p-192378222" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:12px; font-size:15px; font-weight:500; color:var(--accent,#0066cc);">Read&nbsp;›</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#0066cc&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;reduceMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;cornerStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Rounded&quot;,&quot;Sharp&quot;],&quot;default&quot;:&quot;Rounded&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { activeId: null };
+  renderVals() {
+    const accent = this.props.accentColor || '#0066cc';
+    const radius = (this.props.cornerStyle === 'Sharp') ? '0px' : '18px';
+    const open = (id) => () => this.setState({ activeId: id });
+    return {
+      accent, radius,
+      modalOpen: !!this.state.activeId,
+      showPrevera: this.state.activeId === 'prevera',
+      showSpotlight: this.state.activeId === 'spotlight',
+      showDrishtea: this.state.activeId === 'drishtea',
+      pageBlur: this.state.activeId ? 'blur(16px)' : 'none',
+      openPrevera: open('prevera'),
+      openSpotlight: open('spotlight'),
+      openDrishtea: open('drishtea'),
+      closeModal: () => this.setState({ activeId: null }),
+      stop: (e) => e.stopPropagation(),
+    };
+  }
+  componentDidMount() {
+    this._setupPageTransitions();
+    this._setupReveals(); this._setupScroll();
+    this._onKey = (e) => { if (e.key === 'Escape') this.setState({ activeId: null }); };
+    window.addEventListener('keydown', this._onKey);
+  }
+  componentDidUpdate() {
+    this._setupReveals();
+    document.body.style.overflow = this.state.activeId ? 'hidden' : '';
+  }
+
+  _setupPageTransitions() {
+    const root = document.querySelector('[data-root]');
+    if (root) {
+      root.style.animation = 'pageEnter 0.06s ease-out';
+    }
+    
+    // Intercept link clicks to fade out before navigating
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href]');
+      if (!link) return;
+      
+      const href = link.getAttribute('href');
+      // Only fade for same-domain navigation
+      if (href && (href.startsWith('/') || href.includes('.dc.html') || href.includes('.html'))) {
+        e.preventDefault();
+        if (root) {
+          root.style.animation = 'pageExit 0.04s ease-in forwards';
+        }
+        setTimeout(() => {
+          window.location.href = href;
+        }, 40);
+      }
+    });
+  }
+
+  _setupReveals() {
+    if (this._io) { this._io.disconnect(); this._io = null; }
+    const els = Array.from(document.querySelectorAll('[data-reveal]'));
+    if (!els.length) return;
+    if (this.props.reduceMotion) {
+      els.forEach(e => { e.style.opacity = '1'; e.style.transform = 'none'; e.style.filter = 'none'; e.style.transition = 'none'; });
+      return;
+    }
+    const ease = 'opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1), filter 1s cubic-bezier(.16,1,.3,1)';
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          const el = en.target;
+          const d = parseInt(el.getAttribute('data-delay') || '0', 10);
+          el.style.transitionDelay = d + 'ms';
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+          el.style.filter = 'none';
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+    this._io = io;
+    els.forEach(e => {
+      const r = e.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.92) { e.style.opacity = '1'; e.style.transform = 'none'; e.style.filter = 'none'; return; }
+      e.style.opacity = '0';
+      e.style.transform = 'translateY(46px) scale(0.97)';
+      e.style.filter = 'blur(10px)';
+      e.style.transition = ease;
+      io.observe(e);
+    });
+  }
+  _setupScroll() {
+    const bar = document.querySelector('[data-progress]');
+    if (!bar) return;
+    let ticking = false;
+    const update = () => { ticking = false; const st = window.scrollY || document.documentElement.scrollTop; const max = (document.documentElement.scrollHeight - window.innerHeight) || 1; bar.style.width = Math.min(100, (st / max) * 100) + '%'; };
+    this._onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    update();
+  }
+  componentWillUnmount() { if (this._io) this._io.disconnect(); if (this._onScroll) window.removeEventListener('scroll', this._onScroll); if (this._onKey) window.removeEventListener('keydown', this._onKey); document.body.style.overflow = ''; }
+}
+</script>
+</body>
+</html>
