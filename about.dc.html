@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
+  ::selection { background: #b3d4ff; }
+  .serif { font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 700; letter-spacing: -0.035em; }
+  @keyframes blobA { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(28px,-34px) scale(1.08); } }
+  @keyframes blobB { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-32px,26px) scale(1.06); } }
+  @keyframes pageEnter { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes pageExit { from { opacity: 1; } to { opacity: 0; } }
+  @keyframes lbFade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes lbZoom { 0% { opacity: 0; transform: scale(0.4) translateY(40px); filter: blur(16px); } 60% { filter: blur(0); } 100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); } }
+  @keyframes lbSwap { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+  @keyframes lbSlideNext { from { opacity: 0; transform: translateX(7%) scale(0.97); } to { opacity: 1; transform: translateX(0) scale(1); } }
+  @keyframes lbSlidePrev { from { opacity: 0; transform: translateX(-7%) scale(0.97); } to { opacity: 1; transform: translateX(0) scale(1); } }
+  @keyframes hintBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Playfair+Display:ital,wght@1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
+</helmet>
+
+<div data-root="" style="--accent: {{ accent }}; --radius: {{ radius }}; position:relative; z-index:0; background:#ffffff; color:#1d1d1f; overflow-x:hidden;">
+
+  <div aria-hidden="true" style="position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden;">
+    <div style="position:absolute; top:-8%; left:-8%; width:46vw; max-width:560px; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle at 30% 30%, rgba(0,102,204,0.16), rgba(0,102,204,0) 70%); filter:blur(8px); animation:blobA 16s ease-in-out infinite;"></div>
+    <div style="position:absolute; bottom:-10%; right:-8%; width:42vw; max-width:520px; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle at 60% 40%, rgba(0,102,204,0.12), rgba(0,102,204,0) 70%); filter:blur(8px); animation:blobB 19s ease-in-out infinite;"></div>
+  </div>
+
+
+  <div data-progress="" style="position:fixed; top:0; left:0; height:3px; width:0%; background:var(--accent,#0066cc); z-index:2000; transition:width .08s linear;"></div>
+
+  <header style="position:fixed; top:0; left:0; right:0; height:48px; z-index:1000; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.72); backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid rgba(0,0,0,0.06);">
+    <nav style="width:100%; max-width:1280px; padding:0 22px; display:flex; align-items:center; justify-content:space-between;">
+      <a href="index.dc.html" class="serif" style="font-size:23px; letter-spacing:0;">Drishti Arora</a>
+      <div style="display:flex; gap:26px; font-size:13px;">
+        <a href="about.dc.html" style="color:var(--accent,#0066cc); font-weight:500;">About</a>
+        <a href="work.dc.html" style="opacity:.85;">Work</a>
+        <a href="writing.dc.html" style="opacity:.85;">Writing</a>
+        <a href="contact.dc.html" style="opacity:.85;">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HEADER -->
+  <section data-screen-label="About header" style="padding:150px 22px 24px;">
+    <div style="max-width:1280px; margin:0 auto;">
+      <p style="margin:0 0 14px; font-size:15px; font-weight:600; letter-spacing:.02em; color:var(--accent,#0066cc);">About</p>
+      <h1 class="serif" style="margin:0; font-size:clamp(52px,10vw,116px); letter-spacing:-0.01em; line-height:0.92;">Hey it's <span style="font-family:'Playfair Display',Georgia,serif; font-style:italic; font-weight:600; letter-spacing:0; color:#003d99;">Drishti.</span></h1>
+    </div>
+  </section>
+
+  <!-- PORTRAIT + BIO -->
+  
+
+  <!-- EXPERIENCE / RESUME -->
+  <section data-screen-label="Bio" style="padding:0 22px 90px;">
+    <div style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: auto minmax(0,1fr); gap: 88px; align-items: center; position: relative">
+      <div data-reveal="" style="position:relative; width:560px; max-width:100%;">
+        <img src="images/about-collage-3.png" alt="Drishti Arora collage" style="display: block; width: 100%; height: auto;">
+      </div>
+      <div data-reveal="" data-delay="100" style="position:relative; font-size:20px; line-height:1.65; color:#1d1d1f;">
+        <p style="margin:0 0 22px;">I'm Drishti, a 16-year-old driven by the belief that young people can create meaningful change and challenge the status quo.</p>
+        <p style="margin:0 0 22px; color: #6E6E73;">I'm passionate about business, technology, and building ideas that have a real impact on the world around me.</p>
+        <p style="margin:34px 0 4px; font-weight:600; color: #0066cc;">More about me!!</p>
+        <p style="margin:0; color: #6E6E73;">Outside of academics, I love sports, dance, and traveling. Whether I'm working on a new idea, learning a new skill, or exploring a new place, I'm always looking for ways to grow, challenge myself, and become the best version of myself.</p>
+      </div>
+    </div>
+  </section><section data-screen-label="Experience" style="background:#f5f5f7; padding:110px 22px;">
+    <div style="max-width:1120px; margin:0 auto;">
+      <h2 data-reveal="" class="serif" style="margin:0 0 48px; font-size:clamp(38px,6vw,64px); letter-spacing:0; line-height:0.95;">Experience.</h2>
+
+      <div data-reveal="" style="display:grid; grid-template-columns:140px minmax(0,1fr) 280px; gap:24px; padding:30px 0; border-top:1px solid #d2d2d7;">
+        <span style="font-size:15px; font-weight:500; color:#86868b;">2025 — Present</span>
+        <div>
+          <h3 style="margin:0 0 6px; font-size:22px; font-weight:600; letter-spacing:-0.02em;">The Knowledge Society</h3>
+          <p style="margin:0 0 4px; font-size:16px; color:var(--accent,#0066cc); font-weight:500;">Innovate '25 - '26 &amp; Activate September '26 - Present</p>
+          <p style="margin:0; font-size:16px; line-height:1.55; color:#6e6e73;"></p><div style="color: #6E6E73">&nbsp;Innovate:&nbsp;<br>- Spotlight Presenter (1 of 7 students picked from over ~100)</div><div style="color: #6E6E73">&nbsp;- 3rd in Toronto and 4th Globally to Cerify Focus</div><div style="color: #6E6E73">&nbsp;- Mini Google Consulting Challenge - Top 4 Toronto (No specific order)</div><div style="color: #6E6E73">&nbsp;- Lovable Consulting Challenge - Top 5 Toronto and Top 12 Globally (No specific order)</div><div style="color: #6E6E73">&nbsp;- Hackathon TKS '26 Overall Winner</div><div style="color: #6E6E73">&nbsp;- Velocity Student (Top 7% of all of TKS Toronto)</div><div style="color: #6E6E73">&nbsp;- Moonshot People’s Choice Award</div><div style="color: #6E6E73">&nbsp;- Student Ambassador</div><div style="color: #6E6E73">&nbsp;- Spotlight Presenter (1 of 8 chosen) - End of year<br><br>Activate:<br>&nbsp;- Consulted for MaverickX</div><p></p>
+        </div>
+        <div style="align-self:start;">
+          <div style="display:flex; align-items:center; gap:7px; margin:0 0 10px;">
+            <span style="font-size:12px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; color:var(--accent,#0066cc);">Tap a photo to explore</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent,#0066cc); animation:hintBob 1.6s ease-in-out infinite;"><path d="M12 5v14M5 12l7 7 7-7"></path></svg>
+          </div>
+          <div data-gallery="" style="display:grid; grid-template-columns:1fr 1fr; gap:8px; align-content:start;">
+          <img data-gimg="" src="images/about-7.jpg" alt="" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:10px; cursor:zoom-in; display:block; background:#e6e6eb;">
+          <img data-gimg="" src="images/about-8.jpg" alt="" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:10px; cursor:zoom-in; display:block; background:#e6e6eb;">
+          <img data-gimg="" src="images/about-9.jpg" alt="" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:10px; cursor:zoom-in; display:block; background:#e6e6eb;">
+          <img data-gimg="" src="images/about-10.jpg" alt="" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:10px; cursor:zoom-in; display:block; background:#e6e6eb;">
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal="" data-delay="60" style="display:grid; grid-template-columns:140px minmax(0,1fr) 280px; gap:24px; padding:30px 0; border-top:1px solid #d2d2d7;">
+        <span style="font-size:15px; font-weight:500; color:#86868b;">2024 — Present</span>
+        <div>
+          <h3 style="margin:0 0 6px; font-size:22px; font-weight:600; letter-spacing:-0.02em;">North Park Secondary School</h3>
+          <p style="margin:0 0 4px; font-size:16px; color:var(--accent,#0066cc); font-weight:500;">Grade 11 Student - Average: 4.0</p>
+          <p style="margin:0; font-size:16px; line-height:1.55; color:#6e6e73;">&nbsp;- International Business and Technology Program (180 Students out of 1000+ applicants)<br>&nbsp;- SHSM Business Student - Specializing in Business in High School<br>&nbsp;- Athletic Council President<br>&nbsp;- Student Activity Council Grade Representative<br>&nbsp;- Super Council Executive<br>&nbsp;- Link Crew Commissioner<br>&nbsp;- DECA<br>&nbsp;- Model United Nations<br></p>
+        </div>
+        <div style="align-self:start;">
+          <div style="display:flex; align-items:center; gap:7px; margin:0 0 10px;">
+            <span style="font-size:12px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; color:var(--accent,#0066cc);">Tap a photo to explore</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent,#0066cc); animation:hintBob 1.6s ease-in-out infinite;"><path d="M12 5v14M5 12l7 7 7-7"></path></svg>
+          </div>
+          <div data-gallery="" style="display:grid; grid-template-columns:1fr 1fr; gap:8px; align-content:start;">
+          <img data-gimg="" style="aspect-ratio:1; border-radius:6px; width:100%; object-fit:cover; object-position:50% 15%; cursor:pointer;" src="images/about-11.jpg" alt="">
+          <img data-gimg="" src="images/about-12.jpg" alt="" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:10px; cursor:zoom-in; display:block; background:#e6e6eb;">
+          <div style="aspect-ratio:1; border-radius:10px; overflow:hidden; background:#e6e6eb;"><img data-gimg="" src="images/northpark-5.jpeg" alt="" style="{{ tableThumbStyle }}"></div>
+          <img data-gimg="" src="images/northpark-6.jpeg" alt="" style="width:100%; aspect-ratio:1; object-fit:cover; object-position:center top; border-radius:10px; cursor:zoom-in; display:block; background:#e6e6eb;">
+          <img data-gimg="" src="images/about-13.jpg" alt="" style="display:none;">
+          <img data-gimg="" src="images/about-14.jpg" alt="" style="display:none;">
+          <img data-gimg="" src="images/northpark-7.jpeg" alt="" style="display:none;">
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal="" data-delay="120" style="display:grid; grid-template-columns:140px minmax(0,1fr) 280px; gap:24px; padding:30px 0; border-top:1px solid #d2d2d7; border-bottom:1px solid #d2d2d7;">
+        <span style="font-size:15px; font-weight:500; color:#86868b;">2026 — 2026</span>
+        <div>
+          <h3 style="margin:0 0 6px; font-size:22px; font-weight:600; letter-spacing:-0.02em;">TEDx Peel District School Board</h3>
+          <p style="margin:0 0 4px; font-size:16px; color:var(--accent,#0066cc); font-weight:500;">1 of 12 Speakers</p>
+          <p style="margin:0; font-size:16px; line-height:1.55; color:#6e6e73;">&nbsp;- Represented the voices of youth in the 2nd largest board in Canada<br>&nbsp;- ~4% Acceptance Rate<br>&nbsp;- Gave a talk on AI in Healthcare!<br><br></p><div>Check out my talk: <a href="https://www.youtube.com/watch?v=anmb9THzIps" target="_blank" rel="noopener noreferrer" style="color:var(--accent,#0066cc); font-weight:500; text-decoration:underline; text-underline-offset:2px;">watch here</a></div><p></p>
+        </div>
+        <div style="align-self:start;">
+          <div style="display:flex; align-items:center; gap:7px; margin:0 0 10px;">
+            <span style="font-size:12px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; color:var(--accent,#0066cc);">Tap a photo to explore</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent,#0066cc); animation:hintBob 1.6s ease-in-out infinite;"><path d="M12 5v14M5 12l7 7 7-7"></path></svg>
+          </div>
+          <div data-gallery="" style="display:grid; grid-template-columns:1fr 1fr; gap:8px; align-content:start;">
+          
+
+          <img data-gimg="" src="images/about-30.jpg" alt="" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:10px; cursor:zoom-in; display:block; background:#e6e6eb;">
+          <img data-gimg="" src="images/about-31.jpg" alt="" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:10px; cursor:zoom-in; display:block; background:#e6e6eb;">
+          <img data-gimg="" src="images/about-32.jpg" alt="" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:10px; cursor:zoom-in; display:block; background:#e6e6eb;">
+          <img data-gimg="" src="images/about-33.jpg" alt="" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:10px; cursor:zoom-in; display:block; background:#e6e6eb;">
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal="" data-delay="180" style="display:grid; grid-template-columns:140px minmax(0,1fr) 280px; gap:24px; padding:30px 0; border-bottom:1px solid #d2d2d7;">
+        <span style="font-size:15px; font-weight:500; color:#86868b;">2025 — Present</span>
+        <div>
+          <h3 style="margin:0 0 6px; font-size:22px; font-weight:600; letter-spacing:-0.02em;">Wharton Global Youth Program</h3>
+          <p style="margin:0 0 4px; font-size:16px; color:var(--accent,#0066cc); font-weight:500;">Innovation and Startup Culture @ University of San Fransisco</p>
+          <p style="margin:0; font-size:16px; line-height:1.55; color:#6e6e73;">&nbsp;- Recipient&nbsp;of ~$8000 USD merit-based scholarship! <br>&nbsp;- 1 of ~50 people chosen globally for this program!<br>&nbsp;- Met incredible high-achieving people from all across the globe!</p>
+        </div>
+        <div style="align-self:start;">
+          <div style="display:flex; align-items:center; gap:7px; margin:0 0 10px;">
+            <span style="font-size:12px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; color:var(--accent,#0066cc);">Tap a photo to explore</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent,#0066cc); animation:hintBob 1.6s ease-in-out infinite;"><path d="M12 5v14M5 12l7 7 7-7"></path></svg>
+          </div>
+          <div data-gallery="" style="display:grid; grid-template-columns:1fr 1fr; gap:8px; align-content:start;">
+            <img data-gimg="" style="aspect-ratio:1; border-radius:6px; width:100%; object-fit:cover; cursor:pointer;" src="images/about-15.jpg">
+            <img data-gimg="" style="aspect-ratio:1; border-radius:6px; width:100%; object-fit:cover; cursor:pointer;" src="images/about-16.jpg">
+            <img data-gimg="" style="aspect-ratio:1; border-radius:6px; width:100%; object-fit:cover; cursor:pointer;" src="images/about-17.jpg">
+            <img data-gimg="" style="aspect-ratio:1; border-radius:6px; width:100%; object-fit:cover; cursor:pointer;" src="images/about-18.jpg">
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal="" data-delay="240" style="display:grid; grid-template-columns:140px minmax(0,1fr) 280px; gap:24px; padding:30px 0; border-bottom:1px solid #d2d2d7;">
+        <span style="font-size:15px; font-weight:500; color:#86868b;">2026 — Present</span>
+        <div>
+          <h3 style="margin:0 0 6px; font-size:22px; font-weight:600; letter-spacing:-0.02em;">Peel Schools President's Council @ PDSB</h3>
+          <p style="margin:0 0 4px; font-size:16px; color:var(--accent,#0066cc); font-weight:500;">Chair - Highest Leadership Position on the Council</p>
+          <p style="margin:0; font-size:16px; line-height:1.55; color:#6e6e73;">&nbsp;- Elected by committee members for the role<br>&nbsp;- 1 of 20 students on the council board-wide<br>&nbsp;- Nominated by School Admin to be part of the Council</p>
+        </div>
+        <div style="align-self:stretch; display:flex; align-items:center; justify-content:center;">
+          <span style="font-size:20px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; color:var(--accent,#0066cc);">Coming soon!!</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div data-lightbox="" style="position:fixed; inset:0; z-index:3000; display:none; align-items:center; justify-content:center; background:rgba(245,245,247,0.4); -webkit-backdrop-filter:blur(13px) saturate(140%); backdrop-filter:blur(13px) saturate(140%);">
+    <button data-lb-close="" aria-label="Close" style="position:absolute; top:22px; right:26px; width:44px; height:44px; border:none; border-radius:50%; background:rgba(0,0,0,0.55); color:#fff; font-size:22px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;">✕</button>
+    <button data-lb-prev="" aria-label="Previous" style="position:absolute; left:18px; top:50%; transform:translateY(-50%); width:54px; height:54px; border:none; border-radius:50%; background:rgba(0,0,0,0.55); color:#fff; font-size:30px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;">‹</button>
+    <img data-lb-img="" alt="" style="height:80vh; width:auto; max-width:90vw; object-fit:contain; border-radius:12px; box-shadow:0 40px 100px rgba(0,0,0,0.35);">
+    <button data-lb-next="" aria-label="Next" style="position:absolute; right:18px; top:50%; transform:translateY(-50%); width:54px; height:54px; border:none; border-radius:50%; background:rgba(0,0,0,0.55); color:#fff; font-size:30px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center;">›</button>
+    <div data-lb-count="" style="position:absolute; bottom:26px; left:50%; transform:translateX(-50%); color:#1d1d1f; font-size:14px; letter-spacing:.04em; opacity:.75;">1 / 4</div>
+  </div>
+
+  <footer style="background:#f5f5f7; color:#86868b; padding:34px 22px; font-size:12px;">
+    <div style="max-width:1280px; margin:0 auto; display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; align-items:center;">
+      <span>© 2026 Drishti Arora. All rights reserved.</span>
+      <div style="display:flex; gap:20px;">
+        <a href="index.dc.html" style="color:#86868b;">Home</a>
+        <a href="work.dc.html" style="color:#86868b;">Work</a>
+        <a href="writing.dc.html" style="color:#86868b;">Writing</a>
+        <a href="contact.dc.html" style="color:#86868b;">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#0066cc&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;reduceMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;cornerStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Rounded&quot;,&quot;Sharp&quot;],&quot;default&quot;:&quot;Rounded&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;tableZoom&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:1,&quot;max&quot;:3,&quot;step&quot;:0.05,&quot;default&quot;:1.3,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Table photo thumbnail&quot;},&quot;tableX&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:1,&quot;default&quot;:62,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Table photo thumbnail&quot;},&quot;tableY&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:100,&quot;step&quot;:1,&quot;default&quot;:46,&quot;unit&quot;:&quot;%&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Table photo thumbnail&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accentColor || '#0066cc';
+    const radius = (this.props.cornerStyle === 'Sharp') ? '0px' : '18px';
+    const z = this.props.tableZoom ?? 1.3, x = this.props.tableX ?? 62, y = this.props.tableY ?? 46;
+    const tableThumbStyle = { width:'100%', height:'100%', objectFit:'cover', objectPosition:`${x}% ${y}%`, transform:`scale(${z})`, transformOrigin:`${x}% ${y}%`, cursor:'zoom-in', display:'block' };
+    return { accent, radius, tableThumbStyle };
+  }
+  componentDidMount() { this._setupPageTransitions(); this._setupReveals(); this._setupScroll(); this._setupGallery(); }
+  
+  _setupPageTransitions() {
+    const root = document.querySelector('[data-root]');
+    if (root) {
+      root.style.animation = 'pageEnter 0.06s ease-out';
+    }
+    
+    // Intercept link clicks to fade out before navigating
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href]');
+      if (!link) return;
+      
+      const href = link.getAttribute('href');
+      // Only fade for same-domain navigation
+      if (href && (href.startsWith('/') || href.includes('.dc.html') || href.includes('.html'))) {
+        e.preventDefault();
+        if (root) {
+          root.style.animation = 'pageExit 0s forwards';
+        }
+        setTimeout(() => {
+          window.location.href = href;
+        }, 0);
+      }
+    });
+  }
+  _setupGallery() {
+    if (this._galleryBound) return;
+    this._galleryBound = true;
+    const getLb = () => document.querySelector('[data-lightbox]');
+    let imgs = [], idx = 0;
+    let renderToken = 0;
+    const render = (mode) => {
+      const lb = getLb(); if (!lb) return;
+      const img = lb.querySelector('[data-lb-img]');
+      const count = lb.querySelector('[data-lb-count]');
+      count.textContent = (idx + 1) + ' / ' + imgs.length;
+      const anim = mode === 'open'
+        ? 'lbZoom .55s cubic-bezier(.34,1.56,.64,1) both'
+        : mode === 'prev'
+          ? 'lbSlidePrev .34s cubic-bezier(.16,1,.3,1) both'
+          : 'lbSlideNext .34s cubic-bezier(.16,1,.3,1) both';
+      const token = ++renderToken;
+      const src = imgs[idx];
+      const apply = () => {
+        if (token !== renderToken) return; // a newer click superseded this one
+        img.style.animation = 'none';
+        void img.offsetWidth;
+        img.style.animation = anim;
+      };
+      const pre = new Image();
+      pre.onload = () => { if (token !== renderToken) return; img.src = src; apply(); };
+      pre.onerror = () => { if (token !== renderToken) return; img.src = src; apply(); };
+      pre.src = src;
+      if (pre.complete && pre.naturalWidth) { img.src = src; apply(); }
+    };
+    const close = () => { const lb = getLb(); if (lb) { lb.style.display = 'none'; lb.removeAttribute('data-open'); } document.body.style.overflow = ''; };
+    const prev = () => { if (!imgs.length) return; idx = (idx - 1 + imgs.length) % imgs.length; render('prev'); };
+    const next = () => { if (!imgs.length) return; idx = (idx + 1) % imgs.length; render('next'); };
+    this._galleryClick = (e) => {
+      const thumb = e.target.closest('[data-gimg]');
+      if (thumb) {
+        const g = thumb.closest('[data-gallery]');
+        const list = Array.from(g.querySelectorAll('[data-gimg]'));
+        imgs = list.map(i => i.src);
+        idx = list.indexOf(thumb);
+        const lb = getLb(); if (lb) { lb.style.display = 'flex'; lb.setAttribute('data-open', ''); lb.style.animation = 'lbFade .28s ease both'; document.body.style.overflow = 'hidden'; render('open'); }
+        return;
+      }
+      if (e.target.closest('[data-lb-prev]')) { e.stopPropagation(); prev(); return; }
+      if (e.target.closest('[data-lb-next]')) { e.stopPropagation(); next(); return; }
+      if (e.target.closest('[data-lb-close]')) { close(); return; }
+      if (e.target.hasAttribute('data-lightbox')) { close(); return; }
+    };
+    document.addEventListener('click', this._galleryClick);
+    this._lbKey = (e) => {
+      const lb = getLb(); if (!lb || lb.style.display !== 'flex') return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') prev();
+      else if (e.key === 'ArrowRight') next();
+    };
+    window.addEventListener('keydown', this._lbKey);
+  }
+  componentDidUpdate() { this._setupReveals(); }
+  _setupReveals() {
+    if (this._io) { this._io.disconnect(); this._io = null; }
+    const els = Array.from(document.querySelectorAll('[data-reveal]'));
+    if (!els.length) return;
+    if (this.props.reduceMotion) {
+      els.forEach(e => { e.style.opacity = '1'; e.style.transform = 'none'; e.style.filter = 'none'; e.style.transition = 'none'; });
+      return;
+    }
+    const ease = 'opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1)';
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          const el = en.target;
+          const d = parseInt(el.getAttribute('data-delay') || '0', 10);
+          el.style.transitionDelay = d + 'ms';
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+          el.dataset.revealed = '1';
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+    this._io = io;
+    els.forEach(e => {
+      if (e.dataset.revealed === '1') { e.style.opacity = '1'; e.style.transform = 'translateY(0)'; return; }
+      const r = e.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.96) { e.style.opacity = '1'; e.style.transform = 'translateY(0)'; e.dataset.revealed = '1'; return; }
+      e.style.opacity = '0';
+      e.style.transform = 'translateY(28px)';
+      e.style.transition = ease;
+      e.style.willChange = 'opacity, transform';
+      io.observe(e);
+    });
+  }
+  _setupScroll() {
+    const bar = document.querySelector('[data-progress]');
+    if (!bar) return;
+    let ticking = false;
+    const update = () => { ticking = false; const st = window.scrollY || document.documentElement.scrollTop; const max = (document.documentElement.scrollHeight - window.innerHeight) || 1; bar.style.width = Math.min(100, (st / max) * 100) + '%'; };
+    this._onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    update();
+  }
+  componentWillUnmount() { if (this._io) this._io.disconnect(); if (this._onScroll) window.removeEventListener('scroll', this._onScroll); if (this._galleryClick) document.removeEventListener('click', this._galleryClick); if (this._lbKey) window.removeEventListener('keydown', this._lbKey); }
+}
+</script>
+</body>
+</html>
